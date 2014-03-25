@@ -1,0 +1,10 @@
+' Styling settings for PlantUML diagrams
+' See http://plantuml.sourceforge.net for documentation
+' To get a list of possible skinparam settings, run: plantuml -language
+
+' Uncomment the next line to output a monochrome version of diagrams
+'skinparam monochrome true
+
+' Uncomment the next line to remove shadows
+skinparam shadowing false
+
