@@ -3,19 +3,32 @@ zim-plantuml
 
 Plugin for Zim to work with PlantUML diagrams
 
+![](https://raw.githubusercontent.com/rolfkleef/zim-plantuml/master/plantuml-sample.png)
+
 PlantUML
 ========
 
-PlantUML lets you quickly write UML diagrams in plain text:
+PlantUML lets you write UML diagrams in plain text. The source for the diagram above
 
-* sequence diagram,
-* use case diagram,
-* class diagram,
-* activity diagram,
-* component diagram,
-* state diagram
-* object diagram
-* wireframe graphical interface
+```
+@startuml
+
+actor hacker
+actor user
+
+hacker -left- (Adapts Ditaa plugin)
+note top: Simple adaptation
+
+cloud GitHub {
+    hacker -> (Uploads PlantUML plugin)
+    user <- (Downloads PlantUML plugin)
+}
+
+hacker - (Uses UML diagrams in Zim)
+user - (Uses UML diagrams in Zim)
+
+@enduml
+```
 
 http://plantuml.sourceforge.net
 
@@ -45,7 +58,7 @@ A bit of a hack:
 
 On Ubuntu:
   
-  sudo cp zim-plugin/plantumleditor.py /usr/lib/python2.7/dist-packages/zim/plugins
+  `sudo cp zim-plugin/plantumleditor.py /usr/lib/python2.7/dist-packages/zim/plugins`
   
 * Close all Zim instances, and restart it. Under menu Edit > Preferences, you should be able to enable the plugin now.
 
