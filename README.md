@@ -52,13 +52,13 @@ A bit of a hack:
 * Put it somewhere in your path and make it executable
 
 * Fork or download this repo.
-* Put `plantuml` somewhere in your path.
-* Put `my-style.plantuml` in the same directory, and adapt as you like.
-* Copy or symlink the Zim plugin
+* Put `plantuml` somewhere in your path and make it executable.
+* Put `my-style.plantuml` in the same directory, and adapt as you like for your default style settings.
+* Copy or symlink the Zim plugin:
 
 On Ubuntu:
   
   `sudo cp zim-plugin/plantumleditor.py /usr/lib/python2.7/dist-packages/zim/plugins`
   
-* Close all Zim instances, and restart it. Under menu Edit > Preferences, you should be able to enable the plugin now.
+* Close all Zim instances, and restart Zim. Under menu Edit > Preferences, you should be able to enable the plugin now.
 
