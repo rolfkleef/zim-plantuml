@@ -41,7 +41,7 @@ wiki pages on your local machine.
 http://zim-wiki.org
 
 Zim can be extended with plugins. The Ditaa plugin lets you work with
-GraphViz diagrams.
+GraphViz diagrams. This PlantUML plugin is a simple adaptation of the Ditaa plugin.
 
 Install
 =======
