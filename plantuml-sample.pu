@@ -1,0 +1,17 @@
+@startuml
+
+actor hacker
+actor user
+
+hacker -left- (Adapts Ditaa plugin)
+note top: Simple adaptation
+
+cloud GitHub {
+    hacker -> (Uploads PlantUML plugin)
+    user <- (Downloads PlantUML plugin)
+}
+
+hacker - (Uses UML diagrams in Zim)
+user - (Uses UML diagrams in Zim)
+
+@enduml
