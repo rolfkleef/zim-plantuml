@@ -7,43 +7,22 @@
 #
 # Author: Rolf Kleef <rolf@drostan.org>
 # Original Author: Yao-Po Wang <blue119@gmail.com>
-# Date: 2014-03-25
+# Date: 2014-08-04
 # Copyright (c) 2012, 2014, released under the GNU GPL v2 or higher
 #
 #
 
-import gtk
-
+from zim.plugins.base.imagegenerator import ImageGeneratorPlugin, ImageGeneratorClass
 from zim.fs import File, TmpFile
-from zim.plugins import PluginClass
 from zim.config import data_file
 from zim.applications import Application, ApplicationError
-from zim.gui.imagegeneratordialog import ImageGeneratorClass, ImageGeneratorDialog
-from zim.gui.widgets import populate_popup_add_separator
+
 
 # TODO put these commands in preferences
 dotcmd = ('plantuml')
 
-ui_xml = '''
-<ui>
-	<menubar name='menubar'>
-		<menu action='insert_menu'>
-			<placeholder name='plugin_items'>
-				<menuitem action='insert_plantuml'/>
-			</placeholder>
-		</menu>
-	</menubar>
-</ui>
-'''
 
-ui_actions = (
-	# name, stock id, label, accelerator, tooltip, read only
-	('insert_plantuml', None, _('PlantUML...'), '', _('Insert PlantUML'), False),
-		# T: menu item for insert diagram plugin
-)
-
-
-class InsertPlantumlPlugin(PluginClass):
+class InsertPlantumlPlugin(ImageGeneratorPlugin):
 
 	plugin_info = {
 		'name': _('Insert PlantUML'), # T: plugin name
@@ -54,53 +33,28 @@ This plugin provides a diagram editor for zim based on PlantUML.
 		'author': 'Adaptation by Rolf Kleef of Ditaa plugin by Yao-Po Wang',
 	}
 
+	object_type = 'plantuml'
+	short_label = _('PlantUML') # T: menu item
+	insert_label = _('Insert PlantUML') # T: menu item
+	edit_label = _('_Edit PlantUML') # T: menu item
+	syntax = None
+
 	@classmethod
 	def check_dependencies(klass):
 		has_dotcmd = Application(dotcmd).tryexec()
-		return has_dotcmd, [("plantuml", has_dotcmd, True)]
-
-	def __init__(self, ui):
-		PluginClass.__init__(self, ui)
-		if self.ui.ui_type == 'gtk':
-			self.ui.add_actions(ui_actions, self)
-			self.ui.add_ui(ui_xml, self)
-			self.register_image_generator_plugin('plantuml')
-
-	def insert_plantuml(self):
-		dialog = InsertPlantumlDialog.unique(self, self.ui)
-		dialog.run()
-
-	def edit_object(self, buffer, iter, image):
-		dialog = InsertPlantumlDialog(self.ui, image=image)
-		dialog.run()
-
-	def do_populate_popup(self, menu, buffer, iter, image):
-		populate_popup_add_separator(menu, prepend=True)
-
-		item = gtk.MenuItem(_('_Edit PlantUML')) # T: menu item in context menu
-		item.connect('activate',
-			lambda o: self.edit_object(buffer, iter, image))
-		menu.prepend(item)
-
-
-
-class InsertPlantumlDialog(ImageGeneratorDialog):
-
-	def __init__(self, ui, image=None):
-		generator = PlantumlGenerator()
-		ImageGeneratorDialog.__init__(self, ui, _('Insert PlantUML'), # T: dialog title
-            generator, image, help=':Plugins:PlantUML Editor' )
+		return has_dotcmd, [("Plantuml", has_dotcmd, True)]
 
 
 class PlantumlGenerator(ImageGeneratorClass):
 
 	uses_log_file = False
 
-	type = 'plantuml'
+	object_type = 'plantuml'
 	scriptname = 'plantuml.pu'
 	imagename = 'plantuml.png'
 
-	def __init__(self):
+	def __init__(self, plugin):
+		ImageGeneratorClass.__init__(self, plugin)
 		self.dotfile = TmpFile(self.scriptname)
 		self.dotfile.touch()
 		self.pngfile = File(self.dotfile.path[:-3] + '.png') # len('.pu') == 3
