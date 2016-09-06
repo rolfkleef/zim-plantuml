@@ -56,12 +56,19 @@ A bit of a hack:
 * Put `my-style.plantuml` in the same directory, and adapt as you like for your default style settings.
 * Copy or symlink the Zim plugin:
 
-> On Ubuntu:
+> Ubuntu 16.04:
 > 
+> * Make the local directory for plugins (if needed)
+>   `mkdir $HOME/.local/share/zim/plugins/`
+> * Copy the plugin to the directory you just created.
+>   `cp zim-plugin/plantumleditor.py $HOME/.local/share/zim/plugins/`
+>
+> Ubuntu 13.10:
+>
 > * Check which Python version Zim uses (on Ubuntu 13.10 it uses version 2.7, with a system-wide directory for plugins `/usr/lib/python2.7/dist-packages/zim/plugins`)
 > * Make the local directory for plugins (if needed)
 >   `mkdir $HOME/.local/lib/python2.7/site-packages/zim/plugins`
-> * Copy the plugin to this directory
+> * Copy the plugin to the directory you just created.
 >   `cp zim-plugin/plantumleditor.py $HOME/.local/lib/python2.7/site-packages/zim/plugins`
 
 * Close all Zim instances, and restart Zim. Under menu Edit > Preferences, you should be able to enable the plugin now.
