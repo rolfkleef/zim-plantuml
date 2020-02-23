@@ -1,3 +1,6 @@
+**This version of the plugin is archived, and not maintained anymore. Thanks to [@caiofior](https://github.com/caiofior) for [pointing to](https://github.com/rolfkleef/zim-plantuml/issues/5) a [next iteration on Gitlab](https://gitlab.com/Voyvode/zim-umldiagrameditor). And thanks to [Voyvode](https://gitlab.com/Voyvode) for continuing to work on it!**
+
+
 zim-plantuml
 ============
 
